@@ -5,8 +5,7 @@ const getInternalCountForBagColor = (color: string, rules: IBagRules, seenColorR
         return seenColorResults[color];
     }
 
-    let containedBagColors = [];
-    containedBagColors = Object.keys(rules[color]);
+    const containedBagColors = Object.keys(rules[color]);
     if (containedBagColors.length === 0) {
         seenColorResults[color] = 0;
         return 0;
@@ -15,10 +14,11 @@ const getInternalCountForBagColor = (color: string, rules: IBagRules, seenColorR
     let containedColorBagCountSum = 0;
     for (let containedColor of containedBagColors) {
         const numOfBags = Number(rules[color][containedColor]);
-        let containedColorBagCount = getInternalCountForBagColor(containedColor, rules);
+        const containedColorBagCount = getInternalCountForBagColor(containedColor, rules);
         containedColorBagCountSum += numOfBags + (containedColorBagCount * numOfBags);
     }
 
+    seenColorResults[color] = containedColorBagCountSum;
     return containedColorBagCountSum;
 }
 
